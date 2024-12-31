@@ -1,0 +1,26 @@
+def is_valid_combination(queens):
+    n = len(queens)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if abs(queens[i] - queens[j]) == abs(i - j):  # بررسی قطرها
+                return False
+    return True
+
+def solve_nqueens_complete(n):
+    from itertools import permutations
+    solutions = []
+    for perm in permutations(range(n)):
+        if is_valid_combination(perm):
+            solutions.append(perm)
+    return solutions
+
+def print_solution(queens):
+    n = len(queens)
+    for i in queens:
+        print(' '.join('Q' if j == i else '.' for j in range(n)))
+    print("\n")
+
+n = 8
+solutions = solve_nqueens_complete(n)
+for solution in solutions:
+    print_solution(solution)
